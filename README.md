@@ -1,5 +1,11 @@
 # mongodb-test
 
+## 本地仓库关联远程仓库
+```
+$ git remote add origin git@github.com:ZhengMaster2020/mongodb.git
+
+```
+
 ## Project setup
 ```
 npm install
