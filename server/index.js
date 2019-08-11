@@ -3,10 +3,15 @@ const cors = require('cors')()
 const mongoose = require('mongoose')
 const app = express()
 
-mongoose.connect('mongodb://localhost/blog', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true })
+let db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', () => {
+  console.log('mongogdb连接成功')
+})
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
-const BlogPost = new Schema({
+const BlogPostSchema = new Schema({
   id: { type: ObjectId },
   title: { type: String },
   date: { type: Date },
@@ -16,10 +21,22 @@ const BlogPost = new Schema({
   collectCount: { type: Number },
   body: { type: String }
 })
+const BlogPostModel = mongoose.model('BlogPostModel', BlogPostSchema)
+const BlogPost = new BlogPostModel({
+  title: 'testTitle',
+  date: '2019-8-12',
+  categories: 'javascript',
+  author: 'zhengmaster',
+  readCount: 200,
+  collectCount: 300,
+  body: 'i am body'
+})
+
+console.log(BlogPost)
 
 app.use(cors)
 
-app.get('/articles', async(request, response) => {
+app.get('/articles', async (request, response) => {
   response.json(
     {
       flag: true,
@@ -41,6 +58,6 @@ app.get('/articles', async(request, response) => {
   )
 })
 
-app.listen(3000, () => {
-  console.log(`cors enabled and listen the 3000 port`)
+app.listen(5000, () => {
+  console.log(`cors enabled and listen the 5000 port`)
 })
