@@ -22,7 +22,8 @@ const BlogPostSchema = new Schema({
   body: { type: String }
 })
 const BlogPostModel = mongoose.model('BlogPostModel', BlogPostSchema)
-const BlogPost = new BlogPostModel({
+// eslint-disable-next-line no-unused-vars
+const BlogPost = BlogPostModel.create({
   title: 'testTitle',
   date: '2019-8-12',
   categories: 'javascript',
@@ -30,9 +31,13 @@ const BlogPost = new BlogPostModel({
   readCount: 200,
   collectCount: 300,
   body: 'i am body'
+}, (err, BlogPost) => {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(BlogPost)
+  }
 })
-
-console.log(BlogPost)
 
 app.use(cors)
 
