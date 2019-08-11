@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+ <style>
 .el-aside {
   color: #333;
 }

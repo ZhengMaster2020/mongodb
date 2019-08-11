@@ -4,6 +4,18 @@ const mongoose = require('mongoose')
 const app = express()
 
 mongoose.connect('mongodb://localhost/blog', {useNewUrlParser: true})
+const Schema = mongoose.Schema
+const ObjectId = Schema.ObjectId
+const BlogPost = new Schema({
+  id: { type: ObjectId },
+  title: { type: String },
+  date: { type: Date },
+  categories: { type: String },
+  author: { type: String },
+  readCount: { type: Number },
+  collectCount: { type: Number },
+  body: { type: String }
+})
 
 app.use(cors)
 
