@@ -28,6 +28,11 @@ export default new Router({
           path: '/articles/add',
           name: 'articlesAddNews',
           component: () => import(/* webpackChunkName: "articlesAddNews" */ './components/ArticlesAddNews.vue')
+        },
+        {
+          path: '/articles/edit',
+          name: 'articlesEdit',
+          component: () => import(/* webpackChunkName: "articlesEdit" */ './components/ArticlesEdit.vue')
         }
       ]
     },
