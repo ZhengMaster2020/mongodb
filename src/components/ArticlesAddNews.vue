@@ -8,15 +8,17 @@
         <el-input v-model="newArticle.author"  placeholder="请输入作者名称"></el-input>
       </el-form-item>
       <el-form-item label="文章分类">
-        <el-select v-model="newArticle.category"  placeholder="请选择的分类">
-          <el-option label="item" value="item"></el-option>
-        </el-select>
+        <template>
+          <el-select v-model="newArticle.selectValue" multiple clearable  placeholder="请选择的分类">
+            <el-option v-for="item in newArticle.category" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </template>
       </el-form-item>
       <el-form-item label="文章内容">
-        <el-input type="textarea" placeholder="编辑你的文章内容" rows="15"></el-input>
+        <el-input type="textarea" placeholder="编辑你的文章内容" :rows="5" v-model="newArticle.body"></el-input>
       </el-form-item>
+      <el-button type="primary" @click="handleEdit">提交</el-button>
     </el-form>
-    <el-button type="primary">提交</el-button>
   </div>
 </template>
 
@@ -26,14 +28,35 @@ export default {
   data () {
     return {
       newArticle: {
+        date: new Date().toLocaleDateString(),
         title: '',
         author: '',
-        category: ['node.js', 'java', 'javascript']
+        category: [{
+          value: 'Node.js',
+          label: 'Node.js'
+        },
+        {
+          value: 'java',
+          label: 'java'
+        }],
+        selectValue: '',
+        body: ''
       }
     }
   },
   methods: {
-    handleEdit (index, row) {
+    handleEdit () {
+      this.$http.post('articles', this.newArticle).then((req, res) => {
+        console.log(req)
+        this.$message({
+          type: 'success',
+          message: '添加成功',
+          center: true
+        })
+        this.$router.push('/articles/detail')
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }

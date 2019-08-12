@@ -14,7 +14,7 @@ const ObjectId = mongoose.ObjectId
 const Article = mongoose.model('article', new mongoose.Schema({
   id: { type: ObjectId },
   title: { type: String },
-  date: { type: Date },
+  date: { type: Date, default: new Date() },
   categories: { type: String },
   author: { type: String },
   readCount: { type: Number, default: 0 },
@@ -25,23 +25,24 @@ const Article = mongoose.model('article', new mongoose.Schema({
 app.use(cors)
 app.use(express.json())
 
+// 获取文章
 app.get('/api/articles', async (req, res) => {
-  res.json([{
-    id: '001',
-    date: new Date().toLocaleDateString(),
-    title: 'zhangsan',
-    categories: 'Node.js',
-    author: '张三',
-    readCount: '12',
-    collectCount: '20',
-    body: 'body'
-  }])
+  const article = await Article.find()
+  res.send(article)
 })
+// 新增文章
 app.post('/api/articles', async (req, res) => {
   const article = await Article.create(req.body)
   res.send(article)
 })
-
+// 删除文章
+app.delete('/api/articles/:id', async (req, res) => {
+  console.log(req)
+  await Article.findByIdAndDelete(req.params.id)
+  res.send({
+    status: true
+  })
+})
 app.listen(5000, () => {
   console.log(`http://localhost:5000`)
 })
