@@ -1,6 +1,9 @@
 <template>
   <div class="articles-name">
-    <el-tag type="success" effect="light">所有文章</el-tag>
+    <el-row>
+      <el-col :span="12"><el-tag type="success" effect="light">所有文章</el-tag></el-col>
+      <el-col :span="2" offset="10"><el-button type="primary" @click="addArticle" size="small">添加</el-button></el-col>
+    </el-row>
     <el-table :data="articles" >
       <el-table-column type="index" label="序号" width="50"></el-table-column>
       <el-table-column prop="_id" label="ID" ></el-table-column>
@@ -50,6 +53,9 @@ export default {
         })
         this.fetchDate()
       })
+    },
+    addArticle () {
+      this.$router.push('/articles/add')
     }
   },
   created () {
@@ -57,3 +63,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.el-button{
+  margin-top: 20px;
+}
+</style>

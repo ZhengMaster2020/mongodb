@@ -1,31 +1,24 @@
 <template>
   <div class="articles-category">
-    <el-table
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      label="文章编号"
-      width="180">
-      <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.id }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="类型"
-      width="180">
-      <template slot-scope="scope">
-        <span>{{ scope.row.category }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="操作">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          type="success"
-          @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+    <el-tag type="success" effect="light">文章所有分类</el-tag>
+    <el-card style="height:70px;">
+      <el-tag
+        type="danger"
+        closable
+        effect="dark"
+        v-for="item in article.category"
+        :key="item.value"
+        @close="removeCategory(item)"
+        >
+        {{item.label}}
+      </el-tag>
+    </el-card>
+    <el-form :model="article">
+      <el-form-item label="新增类型">
+        <el-input v-model="article.newCategory" placeholder="请输入类型"></el-input>
+      </el-form-item>
+      <el-button type="primary" @click="addNewCategory">提交</el-button>
+    </el-form>
   </div>
 </template>
 
@@ -34,26 +27,51 @@ export default {
   name: 'articles-category',
   data () {
     return {
-      tableData: [{
-        id: '2016-05-02',
-        category: 'node.js',
-        categories: [
-          {
-            value: '选项1',
-            label: 'Node.js'
-          }
-        ],
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      article: {
+        newCategory: '',
+        category: []
+      }
     }
   },
   methods: {
-    handleEdit (index, row) {
-      console.log(index, row)
+    // 新增文章类型
+    addNewCategory () {
+      // 判断用户输入的内容是否为空
+      if (!this.article.newCategory) {
+        this.$message.error('输入内容不能为空')
+      } else {
+        // 新增一个对象 并将用户新增的新增类型的值作为对象的值
+        // 并且插入到 article.category中
+        const newCategory = Object.defineProperties({}, {
+          value: {
+            value: this.article.newCategory,
+            writable: true
+          },
+          label: {
+            value: this.article.newCategory,
+            writable: true
+          }
+        })
+        this.article.category.push(newCategory)
+        this.article.newCategory = ''
+        this.$message.success('添加成功')
+      }
     },
-    handleDelete (index, row) {
-      console.log(index, row)
+    // 删除文章类型
+    removeCategory (tag) {
+      this.article.category.splice(this.article.category.indexOf(tag), 1)
+      this.$message.success('删除成功')
     }
   }
 }
 </script>
+
+<style scoped>
+.el-tag{
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.el-card{
+  margin: 10px 20px 20px 10px;
+}
+</style>

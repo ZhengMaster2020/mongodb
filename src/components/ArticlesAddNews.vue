@@ -15,7 +15,7 @@
         </template>
       </el-form-item>
       <el-form-item label="文章内容">
-        <el-input type="textarea" placeholder="编辑你的文章内容" :rows="5" v-model="newArticle.body"></el-input>
+        <el-input type="textarea" placeholder="编辑你的文章内容" :autosize="{minRows:2, mavRows:6}" v-model="newArticle.body"></el-input>
       </el-form-item>
       <el-button type="primary" @click="handleEdit">提交</el-button>
     </el-form>
@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     handleEdit () {
+      console.log(this.newArticle)
       this.$http.post('articles', this.newArticle).then((req, res) => {
         console.log(req)
         this.$message({
