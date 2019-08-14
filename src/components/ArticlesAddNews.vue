@@ -10,7 +10,7 @@
       <el-form-item label="文章分类">
         <template>
           <el-select v-model="newArticle.selectValue" multiple clearable  placeholder="请选择的分类">
-            <el-option v-for="item in newArticle.category" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            <el-option v-for="item in newArticle.categories" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </template>
       </el-form-item>
@@ -31,14 +31,7 @@ export default {
         date: new Date().toLocaleDateString(),
         title: '',
         author: '',
-        category: [{
-          value: 'Node.js',
-          label: 'Node.js'
-        },
-        {
-          value: 'java',
-          label: 'java'
-        }],
+        categories: [],
         selectValue: '',
         body: ''
       }

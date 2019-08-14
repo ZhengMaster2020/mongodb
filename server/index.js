@@ -15,11 +15,18 @@ const Article = mongoose.model('article', new mongoose.Schema({
   id: { type: ObjectId },
   title: { type: String },
   date: { type: Date, default: new Date() },
-  categories: { type: String },
+  categories: { type: Array },
+  selectValue: { type: Array },
   author: { type: String },
   readCount: { type: Number, default: 0 },
   collectCount: { type: Number, default: 0 },
   body: { type: String }
+}))
+
+const Category = mongoose.model('category', new mongoose.Schema({
+  id: { type: ObjectId },
+  label: { type: String },
+  value: { type: String }
 }))
 
 app.use(cors)
@@ -32,17 +39,41 @@ app.get('/api/articles', async (req, res) => {
 })
 // 新增文章
 app.post('/api/articles', async (req, res) => {
+  console.log(req.body)
   const article = await Article.create(req.body)
   res.send(article)
 })
+
 // 删除文章
 app.delete('/api/articles/:id', async (req, res) => {
-  console.log(req)
+  // console.log(req)
   await Article.findByIdAndDelete(req.params.id)
   res.send({
     status: true
   })
 })
+
+// 获取文章分类
+app.get('/api/category', async (req, res) => {
+  const category = await Category.find()
+  res.send(category)
+})
+
+// 新增文章分类
+app.post('/api/category', async (req, res) => {
+  await Category.create(req.body)
+  const category = await Category.find()
+  res.send(category)
+})
+
+// 删除文章分类
+app.delete('/api/category/:id', async (req, res) => {
+  await Category.findByIdAndDelete(req.params.id)
+  res.send({
+    status: true
+  })
+})
+
 app.listen(5000, () => {
   console.log(`http://localhost:5000`)
 })
