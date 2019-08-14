@@ -17,7 +17,7 @@
       <el-form-item label="文章内容">
         <el-input type="textarea" placeholder="编辑你的文章内容" :autosize="{minRows:2, mavRows:6}" v-model="newArticle.body"></el-input>
       </el-form-item>
-      <el-button type="primary" @click="handleEdit">提交</el-button>
+      <el-button type="primary" @click="addNewArticles">提交</el-button>
     </el-form>
   </div>
 </template>
@@ -38,10 +38,17 @@ export default {
     }
   },
   methods: {
-    handleEdit () {
-      console.log(this.newArticle)
-      this.$http.post('articles', this.newArticle).then((req, res) => {
-        console.log(req)
+    // 初始化 获取文章所有类型
+    fetchArticlesCategory () {
+      this.$http.get('category').then(res => {
+        this.newArticle.categories = res.data
+      })
+    },
+    // 新增文章
+    addNewArticles () {
+      this.newArticle.categories = this.newArticle.selectValue
+      console.log(this.newArticle.selectValue)
+      this.$http.post('articles', this.newArticle).then(res => {
         this.$message({
           type: 'success',
           message: '添加成功',
@@ -52,6 +59,9 @@ export default {
         console.log(err)
       })
     }
+  },
+  created () {
+    this.fetchArticlesCategory()
   }
 }
 </script>

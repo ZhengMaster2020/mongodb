@@ -9,10 +9,10 @@
       <el-table-column prop="_id" label="ID" ></el-table-column>
       <el-table-column prop="date" label="发布日期" ></el-table-column>
       <el-table-column prop="title" label="文章标题" width="120"></el-table-column>
-      <el-table-column prop="categories" label="文章分类" width="100">
+      <el-table-column prop="categories" label="文章分类" width="160">
          <template slot-scope="scope">
-          <el-button type="success" size="mini" palin round disabled v-for="item in scope.row.categories" :key="item.label">
-            {{item.label}}
+          <el-button type="success" size="mini" palin round disabled v-for="item in scope.row.categories" :key="item" class="category-btn">
+            {{item}}
           </el-button>
         </template>
       </el-table-column>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.el-button{
-  margin-top: 20px;
+.category-btn{
+  margin-top: 15px;
 }
 </style>

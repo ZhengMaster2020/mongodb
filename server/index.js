@@ -39,7 +39,6 @@ app.get('/api/articles', async (req, res) => {
 })
 // 新增文章
 app.post('/api/articles', async (req, res) => {
-  console.log(req.body)
   const article = await Article.create(req.body)
   res.send(article)
 })
@@ -61,6 +60,7 @@ app.get('/api/category', async (req, res) => {
 
 // 新增文章分类
 app.post('/api/category', async (req, res) => {
+  console.log(req.body)
   await Category.create(req.body)
   const category = await Category.find()
   res.send(category)
