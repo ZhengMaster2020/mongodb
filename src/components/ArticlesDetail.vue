@@ -48,7 +48,10 @@ export default {
       })
     },
     handleEdit (id) {
-      this.$router.push('/articles/edit')
+      this.$router.push({
+        path: '/articles/edit',
+        query: { id }
+      })
     },
     handleDelete (id) {
       this.$http.delete(`articles/${id}`).then((req, res) => {
