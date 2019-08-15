@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'articles-edit',
   data () {
@@ -62,6 +64,8 @@ export default {
     })
     // 获取传过来id值的文章数据
     this.$http.get(`articles/${this.$route.query.id}`).then(res => {
+      res.data.date = moment(res.data.date).format('YYYY-MM-DD HH:mm:ss')
+      this.articles = res.data
       this.editArticle = res.data
     })
   }
