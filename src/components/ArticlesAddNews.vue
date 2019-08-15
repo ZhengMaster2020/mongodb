@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       newArticle: {
-        date: new Date().toLocaleDateString(),
+        date: new Date(),
         title: '',
         author: '',
         categories: [],
@@ -47,7 +47,6 @@ export default {
     // 新增文章
     addNewArticles () {
       this.newArticle.categories = this.newArticle.selectValue
-      console.log(this.newArticle.selectValue)
       this.$http.post('articles', this.newArticle).then(res => {
         this.$message({
           type: 'success',

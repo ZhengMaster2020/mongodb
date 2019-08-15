@@ -7,7 +7,7 @@
     <el-table :data="articles" >
       <el-table-column type="index" label="序号" width="50"></el-table-column>
       <el-table-column prop="_id" label="ID" ></el-table-column>
-      <el-table-column prop="date" label="发布日期" ></el-table-column>
+      <el-table-column prop="date" label="发布日期" width="110" ></el-table-column>
       <el-table-column prop="title" label="文章标题" width="120"></el-table-column>
       <el-table-column prop="categories" label="文章分类" width="160">
          <template slot-scope="scope">
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'articles-detail',
   data () {
@@ -44,6 +45,9 @@ export default {
   methods: {
     fetchDate () {
       this.$http.get('articles').then(res => {
+        res.data.forEach((val, index) => {
+          val.date = moment(val.date).format('YYYY-MM-DD HH:mm:ss')
+        })
         this.articles = res.data
       })
     },
