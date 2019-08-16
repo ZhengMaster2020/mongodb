@@ -33,6 +33,11 @@ export default new Router({
           path: '/articles/edit',
           name: 'articlesEdit',
           component: () => import(/* webpackChunkName: "articlesEdit" */ './components/ArticlesEdit.vue')
+        },
+        {
+          path: '/articles/search',
+          name: 'articlesSearch',
+          component: () => import(/* webpackChunkName: "articlesSearch" */ './components/ArticlesSearch.vue')
         }
       ]
     },

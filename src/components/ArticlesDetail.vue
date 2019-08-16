@@ -1,8 +1,11 @@
 <template>
   <div class="articles-name">
     <el-row>
-      <el-col :span="12"><el-tag type="success" effect="light">所有文章</el-tag></el-col>
-      <el-col :span="2" :offset="10"><el-button type="primary" @click="addArticle" size="small">添加</el-button></el-col>
+      <el-col :span="12"><el-tag t10ype="success" effect="light">所有文章</el-tag></el-col>
+      <el-col :span="4" :offset="8">
+        <el-button type="primary" round @click="addArticle" icon="el-icon-plus" plain size="small">添加</el-button>
+        <el-button type="primary" round @click="searchArticle" icon="el-icon-search" plain size="small">查找</el-button>
+      </el-col>
     </el-row>
     <el-table :data="articles" >
       <el-table-column type="index" label="序号" width="50"></el-table-column>
@@ -69,6 +72,9 @@ export default {
     },
     addArticle () {
       this.$router.push('/articles/add')
+    },
+    searchArticle () {
+      this.$router.push('/articles/search')
     }
   },
   created () {

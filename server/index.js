@@ -32,13 +32,25 @@ const Category = mongoose.model('category', new mongoose.Schema({
 // 允许跨域
 app.use(cors)
 app.use(express.json())
-
+  
 // 获取文章
 app.get('/api/articles', async (req, res) => {
+  console.log(req.query)
+  if (Object.keys(req.query).length !== 0) {
+    if (req.query.selectOptionVal[0] === '标题') {
+      console.log('biaoti')
+      let article = await Article.find({
+        // eslint-disable-next-line no-eval
+        title: eval('/' + req.query.selectInputVal + '/i')
+      })
+      console.log(article)
+      res.send(article)
+      return
+    }
+  }
   const article = await Article.find()
   res.send(article)
 })
-
 // 根据id 获取文章
 app.get('/api/articles/:id', async (req, res) => {
   const article = await Article.findById(req.params.id)
