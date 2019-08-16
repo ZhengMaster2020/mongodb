@@ -61,6 +61,7 @@ export default {
     }
   },
   methods: {
+    // 查找文章
     searchArticle () {
       if (this.selectInputVal === '') {
         this.$message.error('内容不能为空')
@@ -75,13 +76,18 @@ export default {
         }
       })
         .then(res => {
-          res.data.forEach((val, index) => {
-            val.date = moment(val.date).format('YYYY-MM-DD HH:mm:ss')
-          })
+          if (Array.isArray(res.data)) {
+            console.log(res.data)
+            res.data.forEach((val, index) => {
+              val.date = moment(val.date).format('YYYY-MM-DD HH:mm:ss')
+            })
+          } else {
+            res.data.date = moment(res.data.date).format('YYYY-MM-DD HH:mm:ss')
+          }
           this.article = res.data
-          console.log(this.article.length)
           if (res.data.length === 0) {
             this.$message.error('查无此文章，请重新入')
+            this.selectInputVal = ''
           }
           this.flag = true
         })
@@ -89,12 +95,14 @@ export default {
           alert(`发生错误：${err}`)
         })
     },
+    // 跳转至编辑页面
     handleEdit (id) {
       this.$router.push({
         path: '/articles/edit',
         query: { id }
       })
     },
+    // 删除文章
     handleDelete (id) {
       this.$http.delete(`articles/${id}`).then((req, res) => {
         this.$message({

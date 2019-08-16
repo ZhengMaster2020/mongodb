@@ -32,22 +32,42 @@ const Category = mongoose.model('category', new mongoose.Schema({
 // 允许跨域
 app.use(cors)
 app.use(express.json())
-  
+
 // 获取文章
 app.get('/api/articles', async (req, res) => {
-  console.log(req.query)
+  // console.log(req.query)
+  // 进行条件查询
   if (Object.keys(req.query).length !== 0) {
+  //   switch (req.query.selectOptionVal[0]) {
+  //     case 'id':
+  //       console.log('id')
+  //       let article = await Article.findById(req.query.selectInputVal)
+  //       res.send(article)
+  //       break
+  //     case '作者':
+  //       console.log('author')
+  //       const art = await Article.findById({ author: req.query.selectInputVal })
+  //       res.send(art)
+  //       break
+  //     case '标题':
+  //       let art2 = await Article.find({
+  //         // eslint-disable-next-line no-eval
+  //         title: eval('/' + req.query.selectInputVal + '/i')
+  //       })
+  //       res.send(art2)
+  //       return
+  //   }
+
     if (req.query.selectOptionVal[0] === '标题') {
-      console.log('biaoti')
       let article = await Article.find({
         // eslint-disable-next-line no-eval
         title: eval('/' + req.query.selectInputVal + '/i')
       })
-      console.log(article)
       res.send(article)
       return
     }
   }
+  // 前端没有传query语句，返回全部文章
   const article = await Article.find()
   res.send(article)
 })
