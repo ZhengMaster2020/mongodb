@@ -1,12 +1,13 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <HomeMain/>
+    <el-row>
+      <el-col :span="3"><SideBar/></el-col>
+      <el-col :span="21"> <HomeMain/></el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import HomeMain from '@/components/HomeMain.vue'
 
 export default {

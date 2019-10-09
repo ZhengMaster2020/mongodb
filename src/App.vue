@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header/>
     <router-view />
   </div>
 </template>
@@ -16,5 +17,8 @@ export default {
 *{
   margin: 0;
   padding: 0;
+}
+#app{
+  overflow: hidden;
 }
 </style>
