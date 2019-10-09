@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import notAuth from '../assets/401.png'
+import notAuth from '../assets/images/401.png'
 export default {
   data () {
     return {

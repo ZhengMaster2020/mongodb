@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Header/>
     <el-row>
       <el-col :span="3"><SideBar/></el-col>
       <el-col :span="21"> <HomeMain/></el-col>

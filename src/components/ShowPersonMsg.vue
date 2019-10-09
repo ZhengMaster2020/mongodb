@@ -52,7 +52,8 @@
 </template>
 
 <script>
-import avatar from '../assets/avatar.jpg'
+import avatar from '../assets/images/avatar.jpg'
+
 export default {
   name: 'ShowMsg',
   data () {

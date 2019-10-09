@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import img from '../assets/404.png'
+import img from '../assets/images/404.png'
 
 export default {
   data () {

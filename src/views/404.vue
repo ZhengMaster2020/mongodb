@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import notFound from '../assets/404.png'
+import notFound from '../assets/images/404.png'
 export default {
   data () {
     return {
