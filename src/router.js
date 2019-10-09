@@ -38,6 +38,26 @@ export default new Router({
           path: '/articles/search',
           name: 'articlesSearch',
           component: () => import(/* webpackChunkName: "articlesSearch" */ './components/ArticlesSearch.vue')
+        },
+        {
+          path: '/message/show',
+          name: 'showPersonMsg',
+          component: () => import(/* webpackChunkName: "showPersonMsg" */ './components/ShowPersonMsg.vue')
+        },
+        {
+          path: '/message/modify',
+          name: 'modifyPresonMsg',
+          component: () => import(/* webpackChunkName: "modifyPresonMsg" */ './components/ModifyPersonMsg.vue')
+        },
+        {
+          path: '/error/401',
+          name: '401',
+          component: () => import(/* webpackChunkName: "401" */ './views/401.vue')
+        },
+        {
+          path: '/error/404',
+          name: '404',
+          component: () => import(/* webpackChunkName: "404" */ './views/404.vue')
         }
       ]
     },

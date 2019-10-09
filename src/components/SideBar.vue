@@ -15,10 +15,10 @@
               <i class="el-icon-info"></i>
               信息管理
             </template>
-              <el-menu-item index="">
+              <el-menu-item index="/message/show">
                 <span slot="title">个人信息</span>
               </el-menu-item>
-              <el-menu-item index="">
+              <el-menu-item index="/message/modify">
                 <span slot="title">修改信息</span>
               </el-menu-item>
           </el-submenu>
@@ -27,10 +27,10 @@
               <i class="el-icon-error"></i>
               错误页面
             </template>
-              <el-menu-item index="">
+              <el-menu-item index="/error/401">
                 <span slot="title">401 无权限</span>
               </el-menu-item>
-              <el-menu-item index="">
+              <el-menu-item index="/error/404">
                 <span slot="title">404 无资源</span>
               </el-menu-item>
           </el-submenu>
@@ -48,11 +48,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-aside {
   color: #333;
   float: left;
   margin-top: 4.5px;
   border-top: 1px solid rgb(238, 238, 238);
+}
+.el-aside a {
+  color: #333;
+  text-decoration: none;
 }
 </style>
