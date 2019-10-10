@@ -36,7 +36,3 @@ nodemon server (会找server文件下的index文件运行)
 ```
 npm run build 编译打包输出
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-x
